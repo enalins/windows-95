@@ -1,0 +1,373 @@
+@font-face {
+  font-family: 'w95faregular';
+  src: url('../font/w95fa-webfont.woff2') format('woff2'),
+       url('../font/w95fa-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-family: 'w95faregular';
+  font-size: 16px;
+  --border-light:#cfcfcf;
+  --border-dark:#999999;
+  --color-1: #c0c0c0;
+  --color-2: #808080;
+  --color-3: #6f6f6f;
+  --blue: #000080;
+}
+
+body {
+  overflow: hidden;
+  background: #008080;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+hr {
+  border: inset 2px var(--border-light);
+  margin: 0;
+}
+
+.window {
+  border: outset 3px var(--border-light);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.7);
+  border-radius: 1px;
+  width: max-content;
+  height: max-content;
+  background: var(--color-1);
+  resize: both;
+  overflow: auto;
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+}
+  .window.active .win-header {
+    background-color: var(--blue);
+  }
+
+.win-header {
+  background: var(--color-2);
+  padding: 3px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+  .win-header .title{
+    text-shadow: 0.5px 0px var(--color-1), 1.5px 0px var(--color-1);
+    color: transparent;
+    letter-spacing: 1px;
+    margin: 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    cursor: default;
+  }
+    .win-header .title svg{
+      height: 1rem;
+      filter: drop-shadow(1px 1px rgba(0,0,0,0.3));
+    }
+  .win-header .buttons {
+    width: max-content;
+  }
+    .win-header .buttons button {
+      height: 1.2rem;
+      width: 1.5rem;
+      padding: 0;
+      color: black;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: var(--color-1);
+      border: outset 2px var(--border-light);
+      box-shadow: 1px 1px 0 rgba(0,0,0,0.7);
+    }
+.win-options {
+  padding: 3px 5px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0 0.5rem;
+}
+  .win-options a {
+    text-decoration: none;
+    color: black;
+  }
+    .win-options a:hover {
+      text-decoration: none;
+    }
+    .win-options a + a {
+      margin-left: 0.5rem;
+    }
+    .win-options a span {
+      position: relative;
+    }
+      .win-options a span::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        width: 0.5rem;
+        height: 1px;
+        background-color: black;
+      }
+    .win-options .actions {
+      width: max-content;
+      display: flex;
+    }
+      .win-options .actions button {
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        color: black;
+        font-size: 0.8rem;
+        cursor: pointer;
+        background: var(--color-1);
+        border: outset 2px var(--border-light);
+      }
+        .win-options .actions button.active {
+          background-color: var(--border-light);
+          border: inset 2px var(--border-light);
+          box-shadow: inset 2px 2px 0 rgba(0,0,0,0.5);
+        }
+        .win-options .actions button svg {
+          height: 1rem;
+        }
+          .win-options .actions button:disabled svg {
+            filter: drop-shadow(1px 1px var(--border-light));
+          }
+            .win-options .actions button:disabled svg path {
+              fill: var(--border-dark) !important;
+            }
+.win-content {
+  border: inset 3px var(--border-light);
+  background: white;
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.7);
+  padding: 0.5rem;
+  flex-grow: 1;
+}
+  .win-content.block-list {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+  }
+
+.win-footer {
+  padding: 3px 5px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+  .win-footer .block {
+    height: 1rem;
+    min-width: 40px;
+    border: inset 3px var(--border-light);
+    display: inline-block;
+  }
+
+
+/* [ ICONS ] */
+.icon-block {
+  width: 70px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+  .icon-block img {
+    width: 32px;
+    margin-bottom: 0.1rem;
+  }
+  .icon-block p {
+    margin: 0;
+  }
+
+/* [ SELECT ] */
+.custom-select {
+  position: relative;
+}
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+.select-selected {
+  background-color: white;
+}
+/* Style the arrow inside the select element: */
+  .select-selected:after {
+    content: "\f0dd";
+    position: absolute;
+    top: 0.1rem;
+    right: 0;
+    height: 1.2rem;
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 0.8;
+    font-weight: 900;
+    border: outset 2px var(--border-light);
+    padding: 0.05rem 0.35rem;
+    background-color: var(--color-1);
+  }
+  /* Point the arrow upwards when the select box is open (active): */
+  .select-selected.select-arrow-active:after {
+    content: "\f0d8";
+    line-height: 1;
+  }
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: black;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+.select-selected {
+  border: inset 2px var(--border-light);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.7);
+  padding: 0.3rem 2.3rem 0.2rem 0.5rem;
+  position: relative;
+}
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: var(--border-light);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* [ FOOTER ] */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 35px;
+  background-color: var(--color-1);
+  border-top: 3px outset var(--border-light);
+  padding: 2px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+  footer .windows_listing {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+  }
+    footer .windows_listing .iniciar {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      border: outset 3px var(--border-light);
+      font-weight: bolder;
+      background-color: var(--color-1);
+      cursor: pointer;
+      position: relative;
+    }
+    footer .windows_listing .iniciar.active {
+      border: inset 3px var(--border-light);
+      background-color: var(--border-light);
+    }
+    footer .windows_listing .iniciar:focus::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      background-color: transparent;
+      border: dotted 2px #222;
+    }
+      footer .windows_listing .iniciar img {
+        display: inline;
+        max-height: 1.4rem;
+        margin-right: 0.3rem;
+        margin-bottom: -0.1rem;
+      }
+    footer .windows_listing .iniciar .listing {
+      position: absolute;
+      top: -310px;
+      left: 0;
+
+      background-color: var(--color-1);
+      border: outset 3px var(--border-light);
+
+      display: grid;
+      grid-template-columns: 35px 215px;
+      grid-template-rows: 240px 60px;
+      grid-template-areas: 'windows95 list' 'windows95 shutdown';
+    }
+      footer .windows_listing .iniciar .listing .windows-95 {
+        grid-area: windows95;
+        background-color: var(--color-2);
+      }
+      footer .windows_listing .iniciar .listing .programs {
+        grid-area: list;
+      }
+      footer .windows_listing .iniciar .listing .shutdown {
+        grid-area: shutdown;
+        border-top: solid 3px var(--border-light);
+      }
+
+    footer .windows_listing .win_toggle {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: center;
+      border: outset 3px var(--border-light);
+      min-width: 200px;
+      background-color: var(--color-1);
+      cursor: pointer;
+      position: relative;
+    }
+      footer .windows_listing .win_toggle svg {
+        height: 1rem;
+        filter: drop-shadow(1px 1px rgba(0,0,0,0.3));
+      }
+      footer .windows_listing .win_toggle.active {
+        border: inset 3px var(--border-light);
+        background-color: var(--border-light);
+      }
+      footer .windows_listing .win_toggle:focus::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        width: calc(100% - 8px);
+        height: calc(100% - 8px);
+        background-color: transparent;
+        border: dotted 2px #222;
+      }
+
+    footer .windows_listing .iniciar + .win_toggle, footer .windows_listing .win_toggle + .win_toggle {
+      margin-left: 4px;
+    }
+
+  footer .hora {
+    min-width: 40px;
+    border: inset 3px var(--border-light);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+    background-color: var(--color-1);
+  }
